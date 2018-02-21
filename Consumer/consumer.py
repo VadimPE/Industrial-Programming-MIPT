@@ -4,7 +4,7 @@ import psycopg2 as ps
 connection_to_db = ps.connect(database='mydb', user='login', password='pass', host='database')
 cursor.execute("CREATE TABLE Task1(TEXT varchar(800))")
 connection.commit()
-cursor.close
+cursor.close()
 
 def callback(ch, method, properties, body):
     text_from_queue = (body.decode())
@@ -12,7 +12,7 @@ def callback(ch, method, properties, body):
     line = "INSERT INTO Task1 VALUES('" + text_from_queue + "')"
     cursor.execute(line)
     connection.commit()
-    cursor.close
+    cursor.close()
 
 connection = pika.BlockingConnection(pika.URLParameters("amqp://guest:guest@queue:5672"))
 channel = connection.channel()
